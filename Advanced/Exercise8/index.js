@@ -1,5 +1,7 @@
 /* The following DigitalClock class uses an interval to print the time every second once
-started, until stopped. a) Create a new class PrecisionClock that inherits from DigitalClock and adds the
+started, until stopped. 
+
+a) Create a new class PrecisionClock that inherits from DigitalClock and adds the
 parameter precision – the number of ms between 'ticks'. This precision parameter
 should default to 1 second if not supplied.
 
@@ -34,4 +36,50 @@ class DigitalClock {
   }
 }
 const myClock = new DigitalClock("my clock:");
-myClock.start();
+//myClock.start();
+
+class PrecisionClock extends DigitalClock {
+  constructor(prefix, precision = 1000) {
+    super(prefix);
+    this.precision = precision;
+  }
+
+  start() {
+    this.display();
+    this.timer = setInterval(() => this.display(), this.precision);
+  }
+}
+
+const newClock = new PrecisionClock("Precision Clock:", 250);
+
+//newClock.start();
+
+class AlarmClock extends DigitalClock {
+  constructor(prefix, wakeupTime = "07:00") {
+    super(prefix);
+    this.wakeupTime = wakeupTime;
+  }
+
+  display() {
+    let date = new Date();
+    let [hours, mins, secs] = [
+      date.getHours(),
+      date.getMinutes(),
+      date.getSeconds(),
+    ];
+    if (hours < 10) hours = "0" + hours;
+    if (mins < 10) mins = "0" + mins;
+    if (secs < 10) secs = "0" + secs;
+    const currentTime = `${hours}:${mins}`;
+    if (currentTime === this.wakeupTime) {
+      console.log("Wake Up");
+      this.stop();
+    } else {
+      console.log(`${this.prefix} ${hours}:${mins}:${secs}`);
+    }
+  }
+}
+
+const alarmClock = new AlarmClock("Alarm Clock", "16:47");
+
+alarmClock.start();
