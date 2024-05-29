@@ -49,6 +49,23 @@ if (days < 0) {
 
 console.log(`I am ${years} years, ${months} months and ${days} days old.`);
 
+//This works as expected, but there is a way to do this with less code.
+//Since date1 and date2 are both Date objects, you can get the milliseconds since the Unix epoch
+//with dateObject.getTime(). With this you can get the millisecond difference between the two dates,
+//and then divide the millisecond difference by 1000 * 60 * 60 * 24 to get the difference in days.
+//You can then use Math.abs to make sure the difference is a positive number, and Math.floor
+//to make the result a whole number. Doing it this way would also remove the assumption that
+//a month is 30 days long, making the result more accurate.
+//For example:
+/*
+function daysInBetween(date1, date2) {
+  const time1 = date1.getTime()
+  const time2 = date2.getTime()
+  const difference = time1 - time2
+  const daysDifference = Math.floor(difference / 1000 / 60 / 60 / 24)
+  return `${Math.abs(daysDifference)} days between these two dates`
+}
+*/
 function daysInBetween(date1, date2) {
   let result = "";
   let resultYears = Math.abs(date1.getFullYear() - date2.getFullYear());

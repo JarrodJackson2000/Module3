@@ -16,6 +16,10 @@ Function.prototype.delay = function (ms) {
   const func = this;
   return function (...args) {
     setTimeout(() => {
+      //This part works as expected, but the exercise was intending on this part using apply
+      //to make the delayed functions take any number of parameters
+      //To do that, you'd do
+      //func.apply(this, args)
       func(...args);
     }, ms);
   };

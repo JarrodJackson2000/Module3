@@ -24,6 +24,7 @@ const debouncedFunction = debounce(
   "This function has been debounced"
 );
 
+//printMe shouldn't be globally declared - please see exercise 2 for why that's the case
 printMe = debouncedFunction; //create this debounce function for a)
 /*fire off 3 calls to printMe within 300ms - only the LAST one should print, after
     1000ms of no calls*/
@@ -34,6 +35,8 @@ setTimeout(printMe, 300);
 
 function debounce(func, delay, msg) {
   let timeoutId;
+  //The message variable and msg argument is no longer needed now that you are getting the message
+  //from the arguments
   message = msg;
   return function (...args) {
     clearTimeout(timeoutId);
