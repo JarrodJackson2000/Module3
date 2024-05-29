@@ -36,8 +36,21 @@ const books = [
 ];
 
 function getBookTitle(bookId) {
+  //In this part of the code, you're wanting to find a book with a certain id.
+  //Here you'd be wanting to do book.id == bookId instead of books.id == bookId
+  //In this case, books is the array of books and book is the individual book you're searching
+  //for the specific id.
   let book = books.find((book) => books.id == bookId);
+  //We're wanting the getBookTitle function to return the book's title instead of the whole book
+  //object, so here we'd want to only return book.title
   return book;
 }
 
 console.log(getBookTitle(4));
+
+//The getOldBooks and addGenre functions are missing from this file
+
+//getOldBooks would use filter to return all books that were written before 1950 with the filter method
+
+//addGenre would use map to create a new array with all of the book objects in it, and all of the
+//book objects would have a genre property with the value set to classic.

@@ -25,14 +25,25 @@ let car = {
 car.description(); //works
 //setTimeout(car.description, 200); //fails
 
+//bind returns a new function, it doesn't execute a function. This means that when the
+//arrow function inside the setTimeout executes, the car.description method will not be called.
+//If you remove the arrow function so the 1st parameter is only car.description.bind(car), then
+//it'll work as expected.
 //setTimeout(() => car.description.bind(car), 1000);
 
 //let carClone = { ...car };
 
 let boundCar = car.description.bind(car);
 
+//In the exercise, what it meant by creating a clone and overriding the year was this:
+//car = {...car, year: 2020}
+//We want to set car to a clone of itself and override the year so then it changes it's object reference
+//Calling car.description() inside of a function will give you the new car (the clone), and the bind
+//method would give you the old car (before the clone)
 let carClone = { ...boundCar };
 
+//The description method shouldn't be changed in this case. The intention is to change the data in the
+//car object, and have the description method log it to the console
 carClone.description = () => {
   console.log("This car is a Nissan Skyline from 1992");
 };

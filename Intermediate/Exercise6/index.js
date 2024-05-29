@@ -20,6 +20,10 @@ console.log(unique(testScores)); // [ 55, 84, 97, 63, 32, 91, 43 ]
 function unique(duplicatesArray) {
   newArray = "";
   newArray = new Set(duplicatesArray);
+  //This correctly gets only the unique items from the duplicatesArray, but the
+  //exercise is asking to return an array instead of a set. You can convert the
+  //set to an array by using Array.from() like this:
+  //return Array.from(newArray)
   return newArray;
 }
 
